@@ -85,7 +85,7 @@ class Graph {
   }
 
   /** traverse graph with BDS and returns array of Node values */
-  breadthFirstSearch0(start) {
+  breadthFirstSearch(start) {
     let toVisitStack = [start]; //TODO: change to Queue
     let seen = new Set(toVisitStack);
 
@@ -100,10 +100,6 @@ class Graph {
       }
     }
     return [...seen];
-  }
-
-  breadthFirstSearch(start, seen=new Set([start])) {
-
   }
 
   /** find the distance of the shortest path from the start vertex to the end vertex */
