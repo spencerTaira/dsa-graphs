@@ -17,7 +17,7 @@ class Graph {
 
   /** add Node instance and add it to nodes property on graph. */
   addVertex(vertex) {
-    if (!this.nodes.has(vertex)) this.nodes.add(vertex)
+    if (!this.nodes.has(vertex)) this.nodes.add(vertex);
   }
 
   /** add array of new Node instances and adds to them to nodes property. */
@@ -72,7 +72,7 @@ class Graph {
     return result;
   }
 
-  depthFirstSearch(start, seen=new Set([start]), result=[start.value]) {
+  depthFirstSearch(start, seen = new Set([start]), result = [start.value]) {
 
     for (const neighbor of start.adjacent) {
       if (!seen.has(neighbor)) {
@@ -86,15 +86,15 @@ class Graph {
 
   /** traverse graph with BDS and returns array of Node values */
   breadthFirstSearch(start) {
-    let toVisitStack = [start]; //TODO: change to Queue
-    let seen = new Set(toVisitStack);
+    let toVisitQueue = [start];
+    let seen = new Set(toVisitQueue);
 
-    while (toVisitStack.length) {
-      let current = toVisitStack.shift();
+    while (toVisitQueue.length) {
+      let current = toVisitQueue.shift();
 
       for (let neighbor of current.adjacent) {
         if (!seen.has(neighbor)) {
-          toVisitStack.push(neighbor)
+          toVisitQueue.push(neighbor);
           seen.add(neighbor);
         }
       }
@@ -104,8 +104,32 @@ class Graph {
 
   /** find the distance of the shortest path from the start vertex to the end vertex */
   distanceOfShortestPath(start, end) {
+    // bfs
+    let toVisitQueue = [start];
+    let seen = new Set(toVisitQueue);
+    let distance = {};
+    distance[start.value] = 0;
 
+    if (start === end) return 0;
+    while (toVisitQueue.length) {
+      let current = toVisitQueue.shift();
+
+      if (current === end) {
+        return distance[current.value]
+      }
+
+      for (let neighbor of current.adjacent) {
+        if (!seen.has(neighbor)) {
+          toVisitQueue.push(neighbor);
+          seen.add(neighbor);
+          distance[neighbor.value] = distance[current.value] + 1;
+          console.log(distance)
+        }
+      }
+    }
+    return undefined
   }
+
 }
 
-module.exports = { Graph, Node }
+module.exports = { Graph, Node };
