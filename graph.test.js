@@ -190,7 +190,7 @@ describe("DFS", function () {
     graph.addEdge(W, T);
 
     let result = graph.depthFirstSearch(T);
-
+    console.log(result);
     expect.assertions(2);
 
     if (result[1] === "R") {
@@ -208,6 +208,7 @@ describe("DFS", function () {
         expect(result[3] === "X" || result[3] === "U").toBe(true);
       }
     }
+
   });
 });
 
